@@ -252,7 +252,7 @@ module Groupdate
       keys.each do |key|
         if key != round_time(key)
           # only need to show what database returned since it will cast in Ruby time zone
-          raise Groupdate::Error, "Database and Ruby have inconsistent time zone info. Database returned #{key}"
+          raise Groupdate::Error, "Database and Ruby have inconsistent time zone info. Database returned #{key} != #{round_time(key)}"
         end
       end
     end
