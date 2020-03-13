@@ -1,5 +1,6 @@
 module Groupdate
   class RelationBuilder
+    include SqlServerGroupClause
     attr_reader :period, :column, :day_start, :week_start, :series_label
 
     def initialize(relation, column:, period:, time_zone:, time_range:, week_start:, day_start:, series_label:)
@@ -31,6 +32,8 @@ module Groupdate
       adapter_name = @relation.connection.adapter_name
       query =
         case adapter_name
+        when "SQLServer"
+          sql_server_group_clause
         when "Mysql2", "Mysql2Spatial", "Mysql2Rgeo"
           day_start_column = "CONVERT_TZ(#{column}, '+00:00', ?) - INTERVAL ? second"
 
