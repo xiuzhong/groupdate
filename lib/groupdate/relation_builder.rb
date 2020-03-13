@@ -1,3 +1,5 @@
+require_relative 'sql_server_group_clause'
+
 module Groupdate
   class RelationBuilder
     include SqlServerGroupClause
@@ -29,7 +31,7 @@ module Groupdate
       query =
         case adapter_name
         when "SQLServer"
-          sql_server_group_clause
+          sql_server_group_clause(time_zone)
         when "MySQL", "Mysql2", "Mysql2Spatial", 'Mysql2Rgeo'
           case period
           when :day_of_week
