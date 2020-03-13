@@ -25,6 +25,23 @@ task :test do
   end
 end
 
+desc "Update the time zone mapping: Windows timezone IDs to the standard TZIDs"
+task :update_tzmap do
+  require 'net/http'
+  require 'json'
+  uri = 'https://raw.githubusercontent.com/unicode-cldr/cldr-core/master/supplemental/windowsZones.json'
+  json_file = 'lib/groupdate/windows_zones.json'
+  json = JSON.parse(Net::HTTP.get(URI(uri)))
+  # json['supplemental']['windowsZones']['mapTimezones'].last
+  # => {"mapZone"=>{"_other"=>"Yakutsk Standard Time", "_type"=>"Asia/Yakutsk Asia/Khandyga", "_territory"=>"RU"}}
+  mapping_r2w = json['supplemental']['windowsZones']['mapTimezones'].each_with_object({}) do |z, r2w|
+    map_zone = z['mapZone']
+    map_zone['_type'].split.each { |type| r2w[type] = map_zone['_other'] }
+  end
+  File.open(json_file, 'w') { |file| file.write(mapping_r2w.to_json) }
+  puts "The windowsZones file is updated: #{json_file}"
+end
+
 task default: :test
 
 desc "Profile call"
