@@ -26,9 +26,11 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency "activerecord-jdbcpostgresql-adapter"
     spec.add_development_dependency "activerecord-jdbcmysql-adapter"
     spec.add_development_dependency "activerecord-jdbcsqlite3-adapter"
+    spec.add_development_dependency 'activerecord-sqlserver-adapter'
   else
     spec.add_development_dependency "pg"
     spec.add_development_dependency "mysql2"
     spec.add_development_dependency "sqlite3"
+    spec.add_development_dependency 'activerecord-sqlserver-adapter'
   end
 end
