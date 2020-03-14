@@ -4,7 +4,6 @@ source "https://rubygems.org"
 gemspec
 
 gem "activerecord", "~> 5.2.0"
-gem 'byebug', platforms: :ruby
 
 if defined?(JRUBY_VERSION)
   gem 'activerecord-jdbc-adapter'

@@ -35,5 +35,6 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency "mysql2", "< 0.5"
     spec.add_development_dependency "sqlite3", "~> 1.3.0"
     spec.add_development_dependency 'activerecord-sqlserver-adapter'
+    spec.add_development_dependency "byebug"
   end
 end
