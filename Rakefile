@@ -25,7 +25,7 @@ task :test do
   end
 end
 
-desc "Update the time zone mapping: Windows timezone IDs to the standard TZIDs"
+desc "Update the time zone mapping: the standard TZIDs to Windows timezone IDs"
 task :update_tzmap do
   require 'net/http'
   require 'json'

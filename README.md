@@ -11,7 +11,7 @@ The simplest way to group by:
 
 :cake: Get the entire series - **the other best part**
 
-Supports PostgreSQL, MySQL, and Redshift, plus arrays and hashes (and limited support for [SQLite](#for-sqlite))
+Supports PostgreSQL, MySQL, SQL Server 2016+ and Redshift, plus arrays and hashes (and limited support for [SQLite](#for-sqlite))
 
 :cupid: Goes hand in hand with [Chartkick](https://www.chartkick.com)
 
@@ -25,7 +25,7 @@ Add this line to your application’s Gemfile:
 gem 'groupdate'
 ```
 
-For MySQL and SQLite, also follow [these instructions](#additional-instructions).
+For MySQL, SQL Server 2016+ and SQLite, also follow [these instructions](#additional-instructions).
 
 ## Getting Started
 
@@ -233,6 +233,14 @@ Hash[ users.group_by_day { |u| u.created_at }.map { |k, v| [k, v.size] } ]
 
 ## Additional Instructions
 
+### For SQL Server 2016+
+
+The mapping of the standard TZIDs and Windows timezone may need update occasionally, the following rake task is for this purpose:
+
+```sh
+rake update_tzmap     # Update the time zone mapping: the standard TZIDs to Windows timezone IDs
+```
+
 ### For MySQL
 
 [Time zone support](https://dev.mysql.com/doc/refman/5.7/en/time-zone-support.html) must be installed on the server.
@@ -266,6 +274,11 @@ Groupdate.time_zone = false
 ```
 
 ## Upgrading
+### 4.1.3
+
+Groupdate 4.1.3 brings a major feature, supporting MS SQL Server 2016 or later (AT TIME ZONE)
+
+- In JRuby, it relies on `activerecord-sqlserver-adapter` `jdbc-mode` branch, which is not ideal. The plan is using `activerecord-jdbcsqlserver-adapter` when JRuby 9.2+ is supported.
 
 ### 4.0
 
