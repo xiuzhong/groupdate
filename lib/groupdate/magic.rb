@@ -15,7 +15,7 @@ module Groupdate
     end
 
     def validate_keywords
-      known_keywords = [:time_zone, :dates, :series, :format, :locale, :range, :reverse]
+      known_keywords = [:time_zone, :dates, :series, :format, :locale, :range, :reverse, :series_label]
 
       if %i[week day_of_week].include?(period)
         known_keywords << :week_start
@@ -57,6 +57,10 @@ module Groupdate
 
     def day_start
       @day_start ||= ((options[:day_start] || Groupdate.day_start).to_f * 3600).round
+    end
+
+    def series_label
+      @series_label ||= (options[:series_label].present? ? options[:series_label] : nil)
     end
 
     def series_builder
@@ -162,6 +166,20 @@ module Groupdate
         end
       end
 
+      def perform_series_label(relation, result)
+        label = options[:series_label]
+        return result unless label.present?
+
+        result.map do |r|
+          r.send("#{label}=", cast_series_label(r.send(label)))
+          r
+        end
+      end
+
+      def cast_series_label(original_label)
+        series_builder.format_series_label(cast_method.call(original_label))
+      end
+
       def self.generate_relation(relation, field:, **options)
         magic = Groupdate::Magic::Relation.new(**options)
 
@@ -174,7 +192,8 @@ module Groupdate
             time_zone: magic.time_zone,
             time_range: magic.time_range,
             week_start: magic.week_start,
-            day_start: magic.day_start
+            day_start: magic.day_start,
+            series_label: magic.series_label
           ).generate
 
         # add Groupdate info
@@ -188,6 +207,13 @@ module Groupdate
       def self.process_result(relation, result, **options)
         relation.groupdate_values.reverse.each do |gv|
           result = gv.perform(relation, result, default_value: options[:default_value])
+        end
+        result
+      end
+
+      def self.process_series_label(relation, result)
+        relation.groupdate_values.reverse.each do |gv|
+          result = gv.perform_series_label(relation, result)
         end
         result
       end

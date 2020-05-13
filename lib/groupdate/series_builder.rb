@@ -72,6 +72,11 @@ module Groupdate
       result
     end
 
+    def format_series_label(series_label)
+      series_label = round_time(series_label) if series_label.respond_to?(:to_time)
+      key_format.call(series_label)
+    end
+
     def round_time(time)
       time = time.to_time.in_time_zone(time_zone)
 
