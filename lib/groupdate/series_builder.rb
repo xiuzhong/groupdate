@@ -73,6 +73,7 @@ module Groupdate
     end
 
     def format_series_label(series_label)
+      series_label = round_time(series_label) if series_label.respond_to?(:to_time)
       key_format.call(series_label)
     end
 
