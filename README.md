@@ -1,5 +1,11 @@
 # Groupdate2
-groupdate2 is an enhanced version of the beautiful [Groupdate](https://github.com/ankane/groupdate) gem, it adds following features to Groupdate:
+groupdate2 is an enhanced version of the beautiful [Groupdate](https://github.com/ankane/groupdate) gem, it adds following features to Groupdate
+
+## Installation
+Add this line to your application’s Gemfile:
+```ruby
+gem 'groupdate2'
+```
 
 ## series_label, an option to include `group clause` in selected result
 
