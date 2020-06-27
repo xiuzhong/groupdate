@@ -4,14 +4,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "groupdate/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "groupdate"
+  spec.name          = "groupdate2"
   spec.version       = Groupdate::VERSION
-  spec.summary       = "The simplest way to group temporal data"
-  spec.homepage      = "https://github.com/ankane/groupdate"
+  spec.summary       = "groupdate with support of SQL Server 2016+"
+  spec.homepage      = "https://github.com/xiuzhong/groupdate2"
   spec.license       = "MIT"
 
-  spec.author        = "Andrew Kane"
-  spec.email         = "andrew@chartkick.com"
+  spec.author        = "Leo Li"
+  spec.email         = "lxz.tty@gmail.com"
 
   spec.files         = Dir["*.{md,txt}", "{lib}/**/*"]
   spec.require_path  = "lib"
