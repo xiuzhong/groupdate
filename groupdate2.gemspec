@@ -20,18 +20,18 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "minitest"
-  spec.add_development_dependency "activerecord"
 
   if RUBY_PLATFORM == "java"
     spec.add_development_dependency "activerecord-jdbcpostgresql-adapter"
     spec.add_development_dependency "activerecord-jdbcmysql-adapter"
     spec.add_development_dependency "activerecord-jdbcsqlite3-adapter"
-    spec.add_development_dependency 'activerecord-sqlserver-adapter'
   else
     spec.add_development_dependency "pg"
     spec.add_development_dependency "mysql2"
     spec.add_development_dependency "sqlite3"
+    # activerecord-sqlserver-adapter doesn't support rails 6 yet
+    spec.add_development_dependency "activerecord", "~> 5.0.0"
     spec.add_development_dependency 'activerecord-sqlserver-adapter'
-    spec.add_development_dependency "byebug"
+    spec.add_development_dependency "tiny_tds"
   end
 end

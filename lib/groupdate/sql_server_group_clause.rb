@@ -68,10 +68,10 @@ module Groupdate
 
         converted_datetime_column = "CAST(#{date_str} AS DATETIME2(0)) AT TIME ZONE '#{time_zone}'"
         if day_start.to_i > 0
-          return "DATEADD(second, #{day_start.to_i}, #{converted_datetime_column})"
-        else
-          return converted_datetime_column
+          converted_datetime_column = "DATEADD(second, #{day_start.to_i}, #{converted_datetime_column})"
         end
+
+        "#{converted_datetime_column} AT TIME ZONE 'UTC'"
       end
     end
 

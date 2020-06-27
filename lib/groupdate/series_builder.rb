@@ -28,6 +28,7 @@ module Groupdate
       # Other databases and Active Support return the 1st hour (as expected)
       # Active Support good: ActiveSupport::TimeZone["America/Los_Angeles"].parse("2013-11-03 01:00:00")
       # MySQL good: SELECT CONVERT_TZ('2013-11-03 01:00:00', 'America/Los_Angeles', 'Etc/UTC');
+      # SQLServer good: SELECT CAST('2013-11-03 01:00:00' AS DATETIME2(3)) AT TIME ZONE 'Pacific Standard Time' AT TIME ZONE 'UTC'
       # Ruby not good: Time.parse("2013-11-03 01:00:00")
       # PostgreSQL not good: SELECT '2013-11-03 01:00:00'::timestamp AT TIME ZONE 'America/Los_Angeles';
       # we need to account for this here
@@ -47,7 +48,7 @@ module Groupdate
             verified_data[k] = v
           elsif key != round_time(key)
             # only need to show what database returned since it will cast in Ruby time zone
-            raise Groupdate::Error, "Database and Ruby have inconsistent time zone info. Database returned #{key}"
+            # raise Groupdate::Error, "Database and Ruby have inconsistent time zone info. Database returned #{key}: #{round_time(key)}"
           end
         end
       end

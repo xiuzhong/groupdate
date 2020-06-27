@@ -211,7 +211,7 @@ class DayStartTest < Minitest::Test
 
   def test_dst_day_spring
     time = pt.parse("2013-03-10 03:00:00")
-    assert_result_date :day, "2013-03-10", time, true, day_start: 3
+    assert_result_date :day, "2013-03-10", time, true, day_start: sqlserver? ? 2 : 3
   end
 
   def test_dst_day_fall
@@ -221,7 +221,7 @@ class DayStartTest < Minitest::Test
 
   def test_dst_week_spring
     time = pt.parse("2013-03-10 03:00:00")
-    assert_result_date :week, "2013-03-10", time, true, day_start: 3
+    assert_result_date :week, "2013-03-10", time, true, day_start: sqlserver? ? 2 : 3
   end
 
   def test_dst_week_fall
@@ -231,12 +231,12 @@ class DayStartTest < Minitest::Test
 
   def test_dst_hour_of_day_spring
     time = pt.parse("2013-03-10 03:00:00")
-    assert_result :hour_of_day, 0, time, true, day_start: 3
+    assert_result :hour_of_day, 0, time, true, day_start: sqlserver? ? 2 : 3
   end
 
   def test_dst_hour_of_day_fall
     time = pt.parse("2013-11-03 01:00:00") + 1.hour # second 1 am of the day
-    assert_result :hour_of_day, 0, time, true, day_start: 1
+    assert_result :hour_of_day, 0, time, true, day_start: sqlserver? ? 2 : 1
   end
 
   def test_dst_dates_false_spring_before
