@@ -1,14 +1,19 @@
 # Groupdate2
-groupdate2 is an enhanced version of the beautiful [Groupdate](https://github.com/ankane/groupdate) gem, it adds following features to Groupdate
+groupdate2 is an enhanced version of the beautiful [Groupdate](https://github.com/ankane/groupdate) gem, it adds more features to Groupdate
+- SQL Server 2016+ support
+- series_label support
 
-## Installation
+# Installation
 Add this line to your application’s Gemfile:
 ```ruby
 gem 'groupdate2'
 ```
 
-## series_label, an option to include `group clause` in selected result
+# Features
+## SQL Server 2016+
+MS SQL Server (2016 and above) support by using (AT TIME ZONE).
 
+## series_label, an option to include `group clause` in selected result
 ### User case
 If you use groupdate not with ActiveRecord::Calculations, but manually selecting the calculation like:
 ```sql
@@ -35,3 +40,11 @@ users.first.created_at_month
 users.first.total
 users.first.average_age
 ```
+
+# Upgrading
+## 5.0.x
+- SQL server support
+- series_label support
+
+## 4.1.x
+This version corresponds to groupdate 4.1.2 with SQL Server support.

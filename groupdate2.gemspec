@@ -3,7 +3,7 @@ require_relative "lib/groupdate/version"
 Gem::Specification.new do |spec|
   spec.name          = "groupdate2"
   spec.version       = Groupdate::VERSION
-  spec.summary       = "The simplest way to group temporal data"
+  spec.summary       = "groupdate with support of SQL Server 2016+, and more features"
   spec.homepage      = "https://github.com/xiuzhong/groupdate2"
   spec.license       = "MIT"
 
